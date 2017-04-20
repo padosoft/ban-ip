@@ -17,7 +17,7 @@ fi
 IPTOBAN=$1
 NOSAVE=$2
 BANCOMMAND="iptables -I INPUT -s ${IPTOBAN} -j DROP"
-RULESPATH="/etc/iptables/rules"
+RULESPATH="/etc/iptables/rules.v4"
 IPTABLESAVECOMMAND="iptables-save"
 
 if [ -z $NOSAVE ]; then
