@@ -4,7 +4,7 @@
 # https://github.com/lopadova
 # https://github.com/padosoft
 
-if [[ ($# < 2) ]]; then
+if [[ ($# < 1) ]]; then
   printf '%s\n%s\n' \
     'USAGE: banip.sh IPTOBAN NOSAVE' \
     'IPTOBAN IP to ban in IPTables'  \
@@ -32,7 +32,8 @@ ${BANCOMMAND}
 
 if [ $NOSAVE != 1 ]; then
 	echo "save iptables rules to ${RULESPATH}"
-	${IPTABLESAVECOMMAND}
+	echo "${IPTABLESAVECOMMAND}"
+    ${IPTABLESAVECOMMAND}
 fi
 
 _end=$(date +%Y-%m-%d.%H.%M.%S)
