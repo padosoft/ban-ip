@@ -18,7 +18,7 @@ IPTOBAN=$1
 NOSAVE=$2
 BANCOMMAND="iptables -I INPUT -s ${IPTOBAN} -j DROP"
 RULESPATH="/etc/iptables/rules"
-IPTABLESAVECOMMAND="iptables-save > ${RULESPATH}"
+IPTABLESAVECOMMAND="iptables-save"
 
 if [ -z $NOSAVE ]; then
     NOSAVE=0
@@ -27,13 +27,14 @@ fi
 _now=$(date +%Y-%m-%d.%H.%M.%S)
 echo "banip start at ${_now}"
 
-echo "ban ip ${IPTOBAN}"
+echo "ban ip ${IPTOBAN}:"
+echo ${BANCOMMAND}
 ${BANCOMMAND}
 
 if [ $NOSAVE != 1 ]; then
-	echo "save iptables rules to ${RULESPATH}"
-	echo "${IPTABLESAVECOMMAND}"
-    ${IPTABLESAVECOMMAND}
+	echo "save iptables rules to ${RULESPATH}:"
+	echo "${IPTABLESAVECOMMAND} > ${RULESPATH}"
+    ${IPTABLESAVECOMMAND} > ${RULESPATH}
 fi
 
 _end=$(date +%Y-%m-%d.%H.%M.%S)
